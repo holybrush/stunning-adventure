@@ -135,3 +135,45 @@ Successfully installed statsmodels-0.9.0
 
     (tf) D:\gyy\Tracking-with-darkflow-master>python run.py
 ```
+
+## KEY
+[简书](https://www.jianshu.com/p/24d7238e0038)
+```
+FLAGS = argHandler()
+FLAGS.setDefaults()
+
+# 输入文件，如果是摄像头就用camera
+FLAGS.demo = "test.avi" # video file to use, or if camera just put "camera"
+# yolo的配置文件，里面包含网络模型，如果要识别快，可以选择tiny-yolo.cfg
+FLAGS.model = "darkflow/cfg/yolo.cfg" # tensorflow model
+# yolo训练后的权重文件
+FLAGS.load = "darkflow/bin/yolo.weights" # tensorflow weights
+# 顾名思义，识别物体的阀值，YOLO中定义的
+FLAGS.threshold = 0.25 # threshold of decetion confidance (detection if confidance > threshold )
+# 是否选用gpu
+FLAGS.gpu = 0 #how much of the GPU to use (between 0 and 1) 0 means use cpu
+# 侦测识别
+FLAGS.track = True # wheither to activate tracking or not
+# 侦测识别的对象
+FLAGS.trackObj = "person" # the object to be tracked
+# 是否保存成视频
+FLAGS.saveVideo = True  #whether to save the video or not
+# 是否启用MOG算法，启用的话，可以根据背景的差异做判断，一般情况在像素低的情况开启
+FLAGS.BK_MOG = False # activate background substraction using cv2 MOG substraction,
+                        #to help in worst case scenarion when YOLO cannor predict(able to detect mouvement, it's not ideal but well)
+                        # helps only when number of detection < 5, as it is still better than no detection.
+# 深度计数模式
+FLAGS.tracker = "deep_sort" # wich algorithm to use for tracking deep_sort/sort (NOTE : deep_sort only trained for people detection )
+# 丢帧数
+FLAGS.skip = 3 # how many frames to skipp between each detection to speed up the network
+# 保存csv文件
+FLAGS.csv = True # whether to write csv file or not(only when tracking is set to True)
+# 可视化显示box
+FLAGS.display = True # display the tracking or not
+
+tfnet = TFNet(FLAGS)
+# 开始识别分析计数
+tfnet.camera()
+exit('Demo stopped, exit.')
+```
+
