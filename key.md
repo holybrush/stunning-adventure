@@ -19,7 +19,7 @@
 → brew postinstall python3
 ```
 
-## virtualenv
+### virtualenv
 ```
 → pip3 install virtualenv virtualenvwrapper
 → PROJECT_HOME=$HOME/Develsource /usr/local/bin/virtualenvwrapper.sh
@@ -28,7 +28,7 @@
 → PROJECT_HOME=$HOME/Develsource /usr/local/bin/virtualenvwrapper.sh
 ```
 
-## opencv
+### opencv
 ```
 → brew install opencv
 → echo /usr/local/opt/opencv/lib/python3.6/site-packages >> /usr/local/lib/python3.6/site-packages/opencv3.pth
@@ -131,12 +131,12 @@ Successfully installed statsmodels-0.9.0
 
 (tf) D:\gyy\Tracking-with-darkflow-master\darkflow>python flow --h
 
-    (tf) D:\gyy\Tracking-with-darkflow-master\darkflow>cd /d D:\gyy\Tracking-with-darkflow-master\
+`(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>cd /d D:\gyy\Tracking-with-darkflow-master\`
 
-    (tf) D:\gyy\Tracking-with-darkflow-master>python run.py
+`(tf) D:\gyy\Tracking-with-darkflow-master>python run.py`
 ```
 
-## KEY
+### KEY
 [简书](https://www.jianshu.com/p/24d7238e0038)
 ```
 FLAGS = argHandler()
@@ -149,6 +149,7 @@ FLAGS.model = "darkflow/cfg/yolo.cfg" # tensorflow model
 # yolo训练后的权重文件
 FLAGS.load = "darkflow/bin/yolo.weights" # tensorflow weights
 # 顾名思义，识别物体的阀值，YOLO中定义的
+# 图像阈值化的一般目的是从灰度图像中分享目标区域和背景区域，然而仅仅通过设定固定阈值(固定阈值的求解可点此查看我写的博文)很难达到理想的分割效果。在实际应用中，我们可以通过某个像素的邻域以某种方法确定这个像素应该具有的阈值，进而保证图像中各个像素的阈值会随着周期围邻域块的变化而变化。在灰度图像中，灰度值变化明显的区域往往是物体的轮廓，所以将图像分成一小块一小块的去计算阈值往往会得出图像的轮廓，而固定阈值的方法就不行，可以把本文的结果和用固定阈值法进行二值化的结果作下对比，很容易发现这一点！（我下面作了对比哦）
 FLAGS.threshold = 0.25 # threshold of decetion confidance (detection if confidance > threshold )
 # 是否选用gpu
 FLAGS.gpu = 0 #how much of the GPU to use (between 0 and 1) 0 means use cpu
