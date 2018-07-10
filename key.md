@@ -106,4 +106,32 @@ deactivate
 → python run.py
 ```
 
-#7.6 casa
+# 7.6 casa
+[Tracking-with-darkflow](https://github.com/bendidi/Tracking-with-darkflow)
+```
+(tf) C:\Users\student>cd /d D:\gyy\Tracking-with-darkflow-master\darkflow
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>pip install Cython
+Requirement already satisfied: Cython in c:\users\student\anaconda3\envs\tf\lib\site-packages (0.28.3)
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow> conda install cython
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>pip install statsmodels
+Collecting statsmodels
+  Downloading https://files.pythonhosted.org/packages/77/2b/8ba61399b31f984c263b177c2e2547a34f0d4d972a24a51fc77c376079b0/statsmodels-0.9.0-cp36-cp36m-win_amd64.whl (7.0MB)
+    100% |████████████████████████████████| 7.0MB 6.6MB/s
+Installing collected packages: statsmodels
+Successfully installed statsmodels-0.9.0
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>python setup.py build_ext --inplace
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>pip install -e .
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>pip install .
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>python flow --h
+
+(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>cd /d D:\gyy\Tracking-with-darkflow-master\
+
+(tf) D:\gyy\Tracking-with-darkflow-master>python run.py
+```
