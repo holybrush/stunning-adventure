@@ -131,7 +131,7 @@ Successfully installed statsmodels-0.9.0
 
 (tf) D:\gyy\Tracking-with-darkflow-master\darkflow>python flow --h
 
-(tf) D:\gyy\Tracking-with-darkflow-master\darkflow>cd /d D:\gyy\Tracking-with-darkflow-master\
+    (tf) D:\gyy\Tracking-with-darkflow-master\darkflow>cd /d D:\gyy\Tracking-with-darkflow-master\
 
-(tf) D:\gyy\Tracking-with-darkflow-master>python run.py
+    (tf) D:\gyy\Tracking-with-darkflow-master>python run.py
 ```
