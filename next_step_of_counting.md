@@ -1,9 +1,8 @@
-# 目录
-[全面客流信息](## 全面客流信息)
-[公共客流 实际运用](## 公共客流 实际运用)
-
-
 # SHOPPING MALL
+
+## 目录
+[全面客流信息](#全面客流信息)
+[公共客流 实际运用](#公共客流_实际运用)
 
 ## 全面客流信息
 
@@ -67,7 +66,7 @@
 ![alt text](https://github.com/holybrush/stunning-adventure/blob/master/1.png "Logo Title Text 1")
 http://www.firscom.cn/
 
-## 公共客流 实际运用
+## 公共客流_实际运用
 
 http://www.vioncount.com/caselist/cid-26/
 
