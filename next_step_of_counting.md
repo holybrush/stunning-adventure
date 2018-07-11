@@ -1,3 +1,4 @@
+[Ready, set, GO!](#ready-set-go)
 
 # SHOPPING MALL
 
