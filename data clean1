@@ -1,0 +1,142 @@
+#### [python] combine several csv ####
+
+#### [r] do data clean and visualisation ####
+# set package
+library("dplyr")
+library("data.table")
+library(tidyr)
+library(dplyr)
+install.packages("sqldf")
+library(sqldf)
+
+# read.csv blank fields to NA 
+df1 <- read.csv("output.csv", header=T, na.strings=c("","NA"))
+
+# handle missing values,omit na
+df2 <- na.omit(df1)
+
+# remove extra heading line
+df3 <- df2[df2$x != "x",]
+
+
+# # type and range checking
+# df3$frame_id <- as.character(df3$frame_id)
+# df3$frame_id <- as.numeric(df3$frame_id)
+# typeof(df3$frame_id)
+# range(df3$frame_id)
+# 
+# df3$track_id <- as.character(df3$track_id)
+# df3$track_id <- as.numeric(df3$track_id)
+# typeof(df3$track_id)
+# range(df3$track_id)
+# 
+# df3$x <- as.character(df3$x)
+# df3$x <- as.numeric(df3$x)
+# typeof(df3$x)
+# range(df3$x)
+# 
+# df3$y <- as.character(d3f$y)
+# df3$y <- as.numeric(df3$y)
+# typeof(df3$y)
+# range(df3$y)
+# 
+# df3$w <- as.character(df3$w)
+# df3$w <- as.numeric(df3$w)
+# typeof(df3$w)
+# range(df3$w)
+# 
+# df3$h <- as.character(df3$h)
+# df3$h <- as.numeric(df3$h)
+# typeof(df3$h)
+# range(df3$h)
+
+#### changing the the column header in a data.frame ####
+df4 <- rename(df3, date = testdata.20150302.csv )
+
+#### change the format of first column(date) ####
+df4$date<-gsub('testdata/','',df4$date)
+df4$date<-gsub('.csv','',df4$date)
+
+# df4$date <- as.numeric(df4$date)
+# typeof(df4$date)
+# range(df4$date)
+
+#### combine first column (date) with third column (track_id) ####
+df5 <- df4
+df5 <- transform ( df5 , id = paste(date,track_id, sep = ""))
+#write.csv(df5,"df5.csv")
+
+
+##### find non-person
+
+# Create the mode function.
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+# Calculate the mode using the user function.
+result <- getmode(df5$y)
+result <- getmode(df5$x)
+print(result)
+
+summary(df5$x)
+getmode(df5$x)
+
+df7 <- df5
+
+library(ggplot2)
+# Basic box plot
+# p <- ggplot(df5, aes(x=date, y=df5$x)) + 
+#   geom_boxplot()
+# p
+
+p <- ggplot(df5, aes(df5$x, df5$y))
+p + geom_point()
+
+check1 <- sqldf('select * from df5 where y <=1')
+check1$x <- as.numeric(check1$x)
+summary(check1$x)
+p <- ggplot(check1, aes(check1$x, check1$y))
+p + geom_point()
+
+
+check1 <- sqldf('select * from df5 where y >=0 and x >=1')
+p <- ggplot(check1, aes(check1$x, check1$y))
+p + geom_point()
+
+check1$x <- as.numeric(check1$x)
+check1$y <- as.numeric(check1$y)
+
+summary(check1$x)
+summary(check1$y)
+p <- ggplot(check1, aes(check1$x, check1$y))
+p + geom_point()
+
+p + geom_point(aes(x = check1$x, y = check1$y), size = 2, col="red",data = check1, alpha = 1)
+
+
+# remove non-person
+df6 <- df5[df5$y != "33",]
+
+p <- ggplot(df6, aes(df6$x, df6$y))
+p + geom_point()
+
+
+
+#### get unique id and count them individually for daily ####
+#### both sum (count) for daily and sum for occuring times (duration)####
+#j <- aggregate(df5$date,by=list(id=id),count)
+
+# get count of pedestrian for every day
+out1 <- sqldf('select date, count(distinct(track_id)) from df6 group by date')
+out1_0 <- sqldf('select date, count(distinct(track_id)) from df5 group by date')
+# get the duration of each pedestrian
+out2 <- sqldf('select date,id, count(id) from df5 group by id')
+out2 <- rename(out2, "duration" = "count(id)" )
+range(out2$duration)
+summary(out2$duration)
+
+
+
+# get the average duration of each day
+out3 <- sqldf('select date, avg(duration) from out2 group by date')
